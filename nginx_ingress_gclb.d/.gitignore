@@ -1,0 +1,10 @@
+# Terraform
+**/.terraform/
+**/.terraform*
+**/*.tfstate
+**/*.tfstate.*
+**/override.tf
+**/*_override.tf
+**/*cred_config.json
+**/*credentials.json
+**/*secret_data.tf

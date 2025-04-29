@@ -1,0 +1,26 @@
+controller:
+  service:
+    enableHttp: false
+    type: ClusterIP
+    annotations:
+      cloud.google.com/neg: '{"exposed_ports": {"443":{"name": "my-gke-cluster-ingress-nginx-neg"}}}'
+  config:
+    use-forwarded-headers: true
+    pid: /run/nginx.pid
+  extraVolumeMounts:
+    - name: nginx-temp
+      mountPath: /run
+  extraVolumes:
+    - name: nginx-temp
+      emptyDir: {}
+  containerSecurityContext:
+    capabilities:
+      drop:
+        - ALL
+      add:
+        - NET_BIND_SERVICE
+    runAsUser: 101
+    runAsGroup: 101
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
